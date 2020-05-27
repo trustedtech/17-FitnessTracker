@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const activitySchema = new Schema({
+const ActivitySchema = new Schema({
 
     day: {
         type: Date,
@@ -40,7 +40,7 @@ const activitySchema = new Schema({
 });
   
 // Creates a virtual property called 'totalDuration' which is used for the reporting view/feature, but not stored in the database
-activitySchema.virtual('totalDuration').get(() => {
+ActivitySchema.virtual('totalDuration').get(() => {
     let totalDuration = 0;
 
     this.exercises.forEach(exercise => {
@@ -52,6 +52,6 @@ activitySchema.virtual('totalDuration').get(() => {
 // Allows us to pass virtual properties as JSON in our response to the view engine 
 ActivitySchema.set('toJSON', { virtuals: true });
   
-const Activity = mongoose.model('Activity', activitySchema);
+const Activity = mongoose.model('Activity', ActivitySchema);
 
 module.exports = Activity;
